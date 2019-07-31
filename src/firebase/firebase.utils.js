@@ -3,13 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: "AIzaSyCoTqKrsOTPgllgSxFlp0BrAMO8cpr_cbA",
-  authDomain: "kruna-db1.firebaseapp.com",
-  databaseURL: "https://kruna-db1.firebaseio.com",
-  projectId: "kruna-db1",
-  storageBucket: "",
-  messagingSenderId: "177041451728",
-  appId: "1:177041451728:web:2ab9e2a9edb6187a"
+  
 }
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
