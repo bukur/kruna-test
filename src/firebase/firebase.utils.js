@@ -3,14 +3,43 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-    apiKey: "AIzaSyC1BsbKxTMCDZTLgZ7FTYUmy7yIvwDT8mg",
-    authDomain: "kruna-db.firebaseapp.com",
-    databaseURL: "https://kruna-db.firebaseio.com",
-    projectId: "kruna-db",
-    storageBucket: "",
-    messagingSenderId: "402112890799",
-    appId: "1:402112890799:web:96bb4438f183c2b4"
+  apiKey: "AIzaSyCoTqKrsOTPgllgSxFlp0BrAMO8cpr_cbA",
+  authDomain: "kruna-db1.firebaseapp.com",
+  databaseURL: "https://kruna-db1.firebaseio.com",
+  projectId: "kruna-db1",
+  storageBucket: "",
+  messagingSenderId: "177041451728",
+  appId: "1:177041451728:web:2ab9e2a9edb6187a"
+}
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`)
+
+  const snapShot = await userRef.get()
+
+  if(!snapShot.exists) {
+    const { displayName, email } = userAuth
+    const createdAt = new Date()
+
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData
+
+        })
+      } catch (error) {
+        console.log('error creating user', error.message)
+      }
+    
   }
+  return userRef;
+}   
+
+
 
 firebase.initializeApp(config);
 
